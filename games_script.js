@@ -6,7 +6,13 @@ function getComputerChoice()
 
 function playRound(playerSelection, computerSelection) {
 
+    if (!playerSelection) {
+        throw new Error("Please provide a valid string.");
+        return;
+    }
+    
     playerSelection = playerSelection.toUpperCase();
+
     if(["ROCK", "PAPER", "SCISSOR"].indexOf(playerSelection) == -1)
     {
         throw new Error("Please provide a valid string.");
