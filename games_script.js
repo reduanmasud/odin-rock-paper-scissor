@@ -1,80 +1,69 @@
-function getComputerChoice()
-{
-    let choice = ["ROCK", "PAPER", "SCISSOR"];
-    return choice[Math.floor(Math.random() * 10)%3];
+// Function to get computer's choice
+function getComputerChoice() {
+    const choices = ["ROCK", "PAPER", "SCISSOR"];
+    return choices[Math.floor(Math.random() * choices.length)];
 }
 
+// Function to play a single round
 function playRound(playerSelection, computerSelection) {
-
-    if (!playerSelection) {
-        throw new Error("Please provide a valid string.");
-        return;
-    }
-    
+    // Convert player's selection to uppercase
     playerSelection = playerSelection.toUpperCase();
 
-    if(["ROCK", "PAPER", "SCISSOR"].indexOf(playerSelection) == -1)
-    {
-        throw new Error("Please provide a valid string.");
-        return;
+    // Validate player's selection
+    if (!["ROCK", "PAPER", "SCISSOR"].includes(playerSelection)) {
+        throw new Error("Please provide a valid selection.");
     }
 
-    if(playerSelection == "ROCK")
-    {
-        if(computerSelection == "PAPER")
-            return {"msg": "You Lose! Paper beats Rock", "score": -1};
-        if(computerSelection == "ROCK")
-            return {"msg": "TIE", "score": 0};
-        if(computerSelection == "SCISSOR")
-            return {"msg": "You Win! Rock breaks the Scissor", "score": 1};
-
-    } else if(playerSelection == "PAPER" )
-    {
-        if(computerSelection == "ROCK")
-            return {"msg": "You Win! Paper beats Rock", "score": 1};
-        if(computerSelection == "PAPER")
-            return {"msg": "TIE", "score": 0};
-        if(computerSelection == "SCISSOR")
-            return {"msg": "You Lose! Scissor cuts the Paper", "score": -1};
-
+    // Determine the winner
+    if (playerSelection === computerSelection) {
+        return { "msg": "TIE", "score": 0 };
+    } else if (
+        (playerSelection === "ROCK" && computerSelection === "SCISSOR") ||
+        (playerSelection === "PAPER" && computerSelection === "ROCK") ||
+        (playerSelection === "SCISSOR" && computerSelection === "PAPER")
+    ) {
+        return { "msg": `You Win! ${playerSelection} beats ${computerSelection}`, "score": 1 };
     } else {
-        if(computerSelection == "ROCK")
-            return {"msg": "You Lose! Rock breaks the Scissor", "score": -1};
-        if(computerSelection == "SCISSOR")
-            return {"msg": "TIE", "score": 0};
-        if(computerSelection == "PAPER")
-            return {"msg": "You Win! Scissor cuts the Paper", "score": 1};
+        return { "msg": `You Lose! ${computerSelection} beats ${playerSelection}`, "score": -1 };
     }
-    
 }
-function startGame()
-{
+
+// Function to start the game
+function startGame() {
     let win = 0;
     let fail = 0;
 
     for (let index = 0; index < 5; index++) {
-        let yourSelection = prompt("Write what you choose!?");
+        let yourSelection = prompt("Choose ROCK, PAPER, or SCISSOR:");
         console.log(yourSelection);
-        let res = playGame(yourSelection);
-        if(res == 1) win++;
-        if(res == -1) fail++;
-        console.log(`Your Score ${win} Computer Score ${fail}`);
+        try {
+            let res = playGame(yourSelection);
+            if (res === 1) win++;
+            if (res === -1) fail++;
+            console.log(`Your Score: ${win}, Computer Score: ${fail}`);
+        } catch (error) {
+            console.log(error.message);
+            index--; // Decrement index to repeat the round
+        }
     }
-    
-    if(win > fail) console.log("Hurra! you WON");
-    if(win < fail) console.log("You Lost The Game");
-    if(win == fail) console.log("TIE")
-        
+
+    // Determine the winner of the game
+    if (win > fail) {
+        console.log("Congratulations! You WON the game.");
+    } else if (win < fail) {
+        console.log("You Lost The Game.");
+    } else {
+        console.log("It's a TIE.");
+    }
 }
 
-
-function playGame(yourSelection){
+// Function to play a single game round
+function playGame(playerSelection) {
     const computerSelection = getComputerChoice();
-    const res = playRound(yourSelection, computerSelection);
-    console.log(res.msg);
-    return res.score;
+    const result = playRound(playerSelection, computerSelection);
+    console.log(result.msg);
+    return result.score;
 }
 
-
-//Starting the game
+// Starting the game
 startGame();
