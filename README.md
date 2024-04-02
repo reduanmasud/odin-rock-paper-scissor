@@ -1,17 +1,18 @@
-# Console-based Rock Paper Scissors Game
+# Rock Paper Scissors Game
 
-Welcome to the console-based Rock Paper Scissors game implemented in JavaScript! This simple game allows players to compete against the computer by choosing between rock, paper, or scissors in the console.
+This console-based Rock Paper Scissors game is implemented in JavaScript. 
 
 ## How to Play
 
 1. Clone or download the repository to your local machine.
 2. Open the `index.html` file in your preferred code editor.
 3. Open the console in your browser or code editor.
-4. Run the game by executing the `rockPaperScissors()` function in the console.
+4. Run the `startGame()` function in the console to start the game.
 5. Follow the on-screen instructions to play the game.
 6. Enter your choice (rock, paper, or scissors) when prompted.
-7. See the result of the game displayed in the console.
-8. Play again if you wish!
+7. See the result of each round displayed in the console.
+8. Play five rounds against the computer.
+9. After five rounds, the game will display the final scores and declare the winner.
 
 ## Features
 
@@ -23,10 +24,23 @@ Welcome to the console-based Rock Paper Scissors game implemented in JavaScript!
 ## Technologies Used
 
 - JavaScript
+- HTML
 
-## Demo
+## How the Game Works
 
-As this is a console-based game, there is no live demo available. However, you can play the game by running the `rockPaperScissors()` function in your browser's console after downloading or cloning the repository.
+The game consists of two main functions:
+
+### `getComputerChoice()`
+
+This function randomly selects one of three choices: "ROCK", "PAPER", or "SCISSOR" for the computer.
+
+### `playRound(playerSelection, computerSelection)`
+
+This function takes the player's selection and the computer's selection as arguments and determines the winner for that round based on the rules of Rock Paper Scissors. It returns an object containing a message indicating the result of the round ("You Win!", "You Lose!", or "TIE") and a score (-1 for loss, 0 for tie, 1 for win).
+
+## How to Start the Game
+
+To start the game, simply run the `startGame()` function in your browser's console. This will prompt you to enter your choice for each round and display the results in the console.
 
 ## Contributing
 
