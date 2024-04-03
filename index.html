@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Rock Paper Games</title>
+    <title>Rock Paper Scissors</title>
 </head>
 <body>
-    <h1>Click on your choice</h1>
-    <p>Click on your choice until on get point 5 fast</p>
-    <section id="playerChoice">
-        <button type="button" id="rock">ROCK</button>
-        <button type="button" id="paper">PAPER</button>
-        <button type="button" id="scissor">SCISSOR</button>
-    </section>
-    <section id="score">
-        <h2>Player: <div id="player"></div></h2>
-        <h2>Computer: <div id="computer"></div></h2>
-    </section>
-    <script src="./games_script.js"></script>
+    <div class="container">
+        <div class="game">
+            <h1>Rock Paper Scissors</h1>
+            <p>Click on your choice until one player gets 5 points.</p>
+            <div id="playerChoice">
+                <button type="button" id="rock">ROCK</button>
+                <button type="button" id="paper">PAPER</button>
+                <button type="button" id="scissor">SCISSORS</button>
+            </div>
+            <div id="score">
+                <h2>Player: <span id="playerScore">0</span></h2>
+                <h2>Computer: <span id="computerScore">0</span></h2>
+            </div>
+        </div>
+    </div>
+    <script src="games_script.js"></script>
 </body>
 </html>
