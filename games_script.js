@@ -1,6 +1,6 @@
 // Function to get computer's choice
 function getComputerChoice() {
-    const choices = ["ROCK", "PAPER", "SCISSOR"];
+    const choices = ["ROCK", "PAPER", "SCISSORS"];
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
@@ -10,7 +10,7 @@ function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toUpperCase();
 
     // Validate player's selection
-    if (!["ROCK", "PAPER", "SCISSOR"].includes(playerSelection)) {
+    if (!["ROCK", "PAPER", "SCISSORS"].includes(playerSelection)) {
         throw new Error("Please provide a valid selection.");
     }
 
@@ -18,9 +18,9 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         return { "msg": "TIE", "score": 0 };
     } else if (
-        (playerSelection === "ROCK" && computerSelection === "SCISSOR") ||
+        (playerSelection === "ROCK" && computerSelection === "SCISSORS") ||
         (playerSelection === "PAPER" && computerSelection === "ROCK") ||
-        (playerSelection === "SCISSOR" && computerSelection === "PAPER")
+        (playerSelection === "SCISSORS" && computerSelection === "PAPER")
     ) {
         return { "msg": `You Win! ${playerSelection} beats ${computerSelection}`, "score": 1 };
     } else {
@@ -30,58 +30,61 @@ function playRound(playerSelection, computerSelection) {
 
 // Function to update score display
 function updateScore(playerScore, computerScore) {
-    const PLAYER = document.querySelector("#player");
-    const COMPUTER = document.querySelector("#computer");
-    const CHOICE = document.querySelector("#playerChoice");
+    const playerScoreElement = document.getElementById("playerScore");
+    const computerScoreElement = document.getElementById("computerScore");
 
-    if (playerScore >= 5 || computerScore >= 5) {
-        if (playerScore > computerScore) {
-            CHOICE.innerHTML = "<h1>Player WON</h1>";
-        } else {
-            CHOICE.innerHTML = "<h1>Computer WON</h1>";
-        }
-    }
-
-    PLAYER.innerHTML = playerScore;
-    COMPUTER.innerHTML = computerScore;
+    playerScoreElement.textContent = playerScore;
+    computerScoreElement.textContent = computerScore;
 }
 
 // Function to start the game
 function startGame() {
-    let win = 0;
-    let fail = 0;
-    
-    const ROCK = document.querySelector('#rock');
-    const PAPER = document.querySelector('#paper');
-    const SCISSOR = document.querySelector('#scissor');
+    let playerScore = 0;
+    let computerScore = 0;
 
-    function handleClick(playerSelection) {
-        try {
-            let res = playGame(playerSelection);
-            if (res === 1) win++;
-            if (res === -1) fail++;
-            updateScore(win, fail);
-            console.log(`Your Score: ${win}, Computer Score: ${fail}`);
-        } catch (error) {
-            console.log(error.message);
+    // Event listeners for player's choices
+    document.getElementById("rock").addEventListener('click', () => {
+        playGame("ROCK");
+    });
+    document.getElementById("paper").addEventListener('click', () => {
+        playGame("PAPER");
+    });
+    document.getElementById("scissor").addEventListener('click', () => {
+        playGame("SCISSORS");
+    });
+
+    // Function to play a single game round
+    function playGame(playerSelection) {
+        const computerSelection = getComputerChoice();
+        const result = playRound(playerSelection, computerSelection);
+        console.log(result.msg);
+        
+        // Update scores and check for game end
+        playerScore += result.score === 1 ? 1 : 0;
+        computerScore += result.score === -1 ? 1 : 0;
+        updateScore(playerScore, computerScore);
+
+        // Check if either player has reached 5 points
+        if (playerScore === 5 || computerScore === 5) {
+            endGame();
         }
     }
 
-    ROCK.addEventListener('click', () => handleClick("ROCK"));
-    PAPER.addEventListener('click', () => handleClick("PAPER"));
-    SCISSOR.addEventListener('click', () => handleClick("SCISSOR"));
-
-    // Determine the winner of the game
-    // This block seems to be unnecessary because the game ends when either player reaches 5 points
+    // Function to end the game
+    function endGame() {
+        if (playerScore > computerScore) {
+            alert("Congratulations! You WON the game.");
+        } else if (playerScore < computerScore) {
+            alert("You Lost The Game.");
+        } else {
+            alert("It's a TIE.");
+        }
+        // Reset scores for a new game
+        playerScore = 0;
+        computerScore = 0;
+        updateScore(playerScore, computerScore);
+    }
 }
 
-// Function to play a single game round
-function playGame(playerSelection) {
-    const computerSelection = getComputerChoice();
-    const result = playRound(playerSelection, computerSelection);
-    console.log(result.msg);
-    return result.score;
-}
-
-// Starting the game
-startGame();
+// Starting the game when the page loads
+document.addEventListener("DOMContentLoaded", startGame);
