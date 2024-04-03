@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Rock Paper Games</title>
 </head>
 <body>
-    
+    <h1>Click on your choice</h1>
+    <p>Click on your choice until on get point 5 fast</p>
+    <section id="playerChoice">
+        <button type="button" id="rock">ROCK</button>
+        <button type="button" id="paper">PAPER</button>
+        <button type="button" id="scissor">SCISSOR</button>
+    </section>
+    <section id="score">
+        <h2>Player: <div id="player"></div></h2>
+        <h2>Computer: <div id="computer"></div></h2>
+    </section>
     <script src="./games_script.js"></script>
 </body>
 </html>
