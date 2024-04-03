@@ -28,27 +28,23 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function updateScore(playerScore, computerScore)
-{
+// Function to update score display
+function updateScore(playerScore, computerScore) {
     const PLAYER = document.querySelector("#player");
     const COMPUTER = document.querySelector("#computer");
     const CHOICE = document.querySelector("#playerChoice");
 
-    if((playerScore >=5 || computerScore >= 5) && playerScore > computerScore)
-    {
-        CHOICE.innerHTML = "<h1>Player WON</h1>";
-
-    } else if ((playerScore >=5 || computerScore >= 5) && playerScore > computerScore)
-    {
-        CHOICE.innerHTML = "<h1>Computer WON</h1>";
+    if (playerScore >= 5 || computerScore >= 5) {
+        if (playerScore > computerScore) {
+            CHOICE.innerHTML = "<h1>Player WON</h1>";
+        } else {
+            CHOICE.innerHTML = "<h1>Computer WON</h1>";
+        }
     }
 
     PLAYER.innerHTML = playerScore;
     COMPUTER.innerHTML = computerScore;
-
-
 }
-
 
 // Function to start the game
 function startGame() {
@@ -59,68 +55,24 @@ function startGame() {
     const PAPER = document.querySelector('#paper');
     const SCISSOR = document.querySelector('#scissor');
 
-    ROCK.addEventListener('click', () => {
+    function handleClick(playerSelection) {
         try {
-            let res = playGame("ROCK");
+            let res = playGame(playerSelection);
             if (res === 1) win++;
             if (res === -1) fail++;
             updateScore(win, fail);
             console.log(`Your Score: ${win}, Computer Score: ${fail}`);
         } catch (error) {
             console.log(error.message);
-            // index--; // Decrement index to repeat the round
         }
-    })
+    }
 
-    PAPER.addEventListener('click', ()=>{
-        try {
-            let res = playGame("PAPER");
-            if (res === 1) win++;
-            if (res === -1) fail++;
-            updateScore(win, fail);
-            console.log(`Your Score: ${win}, Computer Score: ${fail}`);
-        } catch (error) {
-            console.log(error.message);
-           // index--; // Decrement index to repeat the round
-        }
-    })
-
-    SCISSOR.addEventListener('click', ()=>{
-        try {
-            let res = playGame("SCISSOR");
-            if (res === 1) win++;
-            if (res === -1) fail++;
-            updateScore(win, fail);
-            console.log(`Your Score: ${win}, Computer Score: ${fail}`);
-        } catch (error) {
-            console.log(error.message);
-            //index--; // Decrement index to repeat the round
-        }
-    })
-
-    // while (win < 5 && fail < 5) {
-    //     // let yourSelection = prompt("Choose ROCK, PAPER, or SCISSOR:");
-
-    //     console.log(yourSelection);
-    //     try {
-    //         let res = playGame(yourSelection);
-    //         if (res === 1) win++;
-    //         if (res === -1) fail++;
-    //         console.log(`Your Score: ${win}, Computer Score: ${fail}`);
-    //     } catch (error) {
-    //         console.log(error.message);
-    //         index--; // Decrement index to repeat the round
-    //     }
-    // }
+    ROCK.addEventListener('click', () => handleClick("ROCK"));
+    PAPER.addEventListener('click', () => handleClick("PAPER"));
+    SCISSOR.addEventListener('click', () => handleClick("SCISSOR"));
 
     // Determine the winner of the game
-    if (win > fail) {
-        console.log("Congratulations! You WON the game.");
-    } else if (win < fail) {
-        console.log("You Lost The Game.");
-    } else {
-        console.log("It's a TIE.");
-    }
+    // This block seems to be unnecessary because the game ends when either player reaches 5 points
 }
 
 // Function to play a single game round
