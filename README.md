@@ -1,46 +1,60 @@
 # Rock Paper Scissors Game
 
-This console-based Rock Paper Scissors game is implemented in JavaScript. 
+This is a simple implementation of the classic Rock Paper Scissors game using HTML, CSS, and JavaScript.
 
-## How to Play
+## HTML Structure
 
-1. Clone or download the repository to your local machine.
-2. Open the `index.html` file in your preferred code editor.
-3. Open the console in your browser or code editor.
-4. Run the `startGame()` function in the console to start the game.
-5. Follow the on-screen instructions to play the game.
-6. Enter your choice (rock, paper, or scissors) when prompted.
-7. See the result of each round displayed in the console.
-8. Play five rounds against the computer.
-9. After five rounds, the game will display the final scores and declare the winner.
+The HTML structure of the game consists of the following elements:
 
-## Features
+- `h1`: Heading displaying the game title.
+- `p`: Paragraph providing instructions to the player.
+- `section#playerChoice`: Section containing buttons for the player to choose from (ROCK, PAPER, SCISSORS).
+- `section#score`: Section displaying the scores of the player and the computer.
 
-- Simple and intuitive console-based gameplay.
-- Randomized computer choices for added challenge.
-- Real-time display of game results.
-- Easy to understand gameplay suitable for all ages.
+## JavaScript Functionality
 
-## Technologies Used
-
-- JavaScript
-- HTML
-
-## How the Game Works
-
-The game consists of two main functions:
+The JavaScript code provides the functionality to the game:
 
 ### `getComputerChoice()`
 
-This function randomly selects one of three choices: "ROCK", "PAPER", or "SCISSOR" for the computer.
+- Function to randomly select one of ROCK, PAPER, or SCISSORS as the computer's choice.
 
 ### `playRound(playerSelection, computerSelection)`
 
-This function takes the player's selection and the computer's selection as arguments and determines the winner for that round based on the rules of Rock Paper Scissors. It returns an object containing a message indicating the result of the round ("You Win!", "You Lose!", or "TIE") and a score (-1 for loss, 0 for tie, 1 for win).
+- Function to play a single round of the game.
+- Determines the winner based on the player's and computer's selections.
+- Returns an object containing the result message and the score.
 
-## How to Start the Game
+### `updateScore(playerScore, computerScore)`
 
-To start the game, simply run the `startGame()` function in your browser's console. This will prompt you to enter your choice for each round and display the results in the console.
+- Function to update the score displayed on the webpage.
+
+### `startGame()`
+
+- Function to start the game.
+- Initializes player and computer scores.
+- Adds event listeners to the buttons for player's choices.
+- Calls `playGame(playerSelection)` when a player makes a choice.
+
+### `playGame(playerSelection)`
+
+- Function to play a single game round.
+- Calls `getComputerChoice()` to get the computer's choice.
+- Calls `playRound(playerSelection, computerSelection)` to determine the result.
+- Updates scores and checks for game end.
+- Calls `endGame()` if either player reaches 5 points.
+
+### `endGame()`
+
+- Function to end the game.
+- Displays an alert message indicating the game result.
+- Resets scores for a new game.
+
+## Usage
+
+- Clone this repository.
+- Open `index.html` in a web browser to play the game.
+
 
 ## Contributing
 
