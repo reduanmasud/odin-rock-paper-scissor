@@ -2,7 +2,7 @@
 
 This is a simple implementation of the classic Rock Paper Scissors game using HTML, CSS, and JavaScript.
 
-## HTML Structure
+## HTML Structures
 
 The HTML structure of the game consists of the following elements:
 
